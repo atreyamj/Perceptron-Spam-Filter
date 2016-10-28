@@ -57,9 +57,9 @@ def doClassifyDocument(fileName):
     else:
         return 1
 
-def getClassification(directoryPath):
+def getClassification(directoryPath,outputFilePath):
     global spamCount,hamCount
-    with open("nboutput.txt", "w", encoding="latin1") as nbout:
+    with open(outputFilePath, "w", encoding="latin1") as nbout:
         for root, dirs, files in os.walk(directoryPath):
             path = root.split('/')
             for file in files:
@@ -117,7 +117,7 @@ def getPerformanceStatistics(outPutFileName):
     print(hamFscore)
     print(spamFscore)
 
-if  len(sys.argv) != 2:
+if  len(sys.argv) != 3:
     print("Error: The input data path is NULL or empty\n")
     sys.exit(-1)
 
@@ -126,6 +126,6 @@ if  not sys.argv[1]:
     sys.exit(-1)
 
 buildModel("permodel.txt")
-getClassification(sys.argv[1])
-getPerformanceStatistics("nboutput.txt")
+getClassification(sys.argv[1],sys.argv[2])
+getPerformanceStatistics(sys.argv[2])
 sys.exit(0)
