@@ -16,16 +16,17 @@ learnedmodel["ham_yLabel"]=-1
 learnedmodel["learntWords"]=[]
 def computewordWeights(wordType,alpha,wordList):
     global learnedmodel,MAX_LEARN_ITERATIONS,wordWeights
-    if wordType == "ham":
+    if wordType == "hamWords":
         if (learnedmodel["ham_yLabel"] * alpha )<=0:
             for words in wordList:
                 wordWeights[words]+=(learnedmodel["ham_yLabel"]*wordList[words])
             learnedmodel["bias"]+=learnedmodel["ham_yLabel"]
-    else:
+    elif wordType =="spamWords":
         if (learnedmodel["spam_yLabel"] * alpha) <= 0:
             for words in wordList:
                 wordWeights[words] += (learnedmodel["spam_yLabel"] * wordList[words])
             learnedmodel["bias"] += learnedmodel["spam_yLabel"]
+
 def readSpamFile(fileName):
     global spamFileCount
     spamDicts = {}
